@@ -1,5 +1,10 @@
-# A URL shortener
+#Sistemas y Tecnologías Web 
 
+##Práctica: A URL shortener
+
+**Autores:** Jose Antonio Rodríguez Leandro y Noelia Rodríguez Martín
+			 
+**Fecha:** 20 Octubre 2014
 See
 
 * [DataMapper](http://datamapper.org/getting-started.html)
