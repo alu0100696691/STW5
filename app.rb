@@ -38,19 +38,11 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 Base = 36
-$email = "jose@noelia"
+$email = ""
 
 get '/' do
-if @auth then
-        begin
-        redirect '/auth/failure'   #si no se identifica
-
-        end
-
-        else
-        %Q|<a href='/auth/google_oauth2'>Sign in with Google</a></BR><a href='/auth/failure'>Not sign in with Google</a>|
-        end
-
+	@list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :id_usu => $email)  #listar url generales,las que no estan identificadas         
+	haml :index
 end
 
 get '/auth/:name/callback' do
@@ -69,10 +61,10 @@ get '/auth/:name/callback' do
 
 end
 
-get '/auth/failure' do
+get '/noGoogle' do
         puts "inside get '/': #{params}"
-        @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :id_usu => " ")  #listar url generales  
-
+	$email = ""        
+	@list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :id_usu => $email)  #listar url generales  
         haml :index
 
 end
