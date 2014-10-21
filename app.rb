@@ -4,9 +4,7 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'haml'
 require 'uri'
-require 'pp'
 #require 'socket'
-require 'data_mapper'
 require 'data_mapper'
 require 'omniauth-oauth2'      
 require 'omniauth-google-oauth2'
@@ -24,9 +22,15 @@ enable :sessions
 set :session_secret, '*&(^#234a)'
 
 
-
-DataMapper.setup( :default, ENV['DATABASE_URL'] || 
+configure :development do
+	DataMapper.setup( :default, ENV['DATABASE_URL'] || 
                             "sqlite3://#{Dir.pwd}/my_shortened_urls.db" )
+end
+
+configure :production do   #heroku
+	DataMapper.setup(:default, ENV['DATABASE_URL'])
+end
+
 DataMapper::Logger.new($stdout, :debug)
 DataMapper::Model.raise_on_save_failure = true 
 
