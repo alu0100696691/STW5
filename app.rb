@@ -50,6 +50,7 @@ Base = 36
 $email = ""
 
 get '/' do
+	puts "inside get '/': #{params}"
 	@list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :id_usu => $email)  #listar url generales,las que no estan identificadas         
 	haml :index
 end
