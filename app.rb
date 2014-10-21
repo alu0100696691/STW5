@@ -41,6 +41,11 @@ DataMapper.finalize
 #DataMapper.auto_migrate!
 DataMapper.auto_upgrade!
 
+not_found do
+	status 404
+	erb :not_found
+end
+
 Base = 36
 $email = ""
 
@@ -65,13 +70,15 @@ get '/auth/:name/callback' do
 
 end
 
-get '/noGoogle' do
+get '/noGoogle' || '/auth/failure' do
         puts "inside get '/': #{params}"
 	$email = ""        
 	@list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :id_usu => $email)  #listar url generales  
         haml :index
 
 end
+
+
 
 
 post '/' do
