@@ -15,7 +15,7 @@
 
 ###Instrucciones de la práctica
 
-En primer lugar entramos a la web de Heroku, luego miramos que hay una serie de enlaces "Sign in with Google" o "Not Sign in with Google", si elegimos la primera opción nos identificamos con Google y luego todas las URL que acortemos se guardaran al usuario identificado, sin embargo si no queremos identificarnos podemos hacer la misma operación clickeando en "Not Sign in with Google" con lo que se mostrará la lista de URL acortadas de todos los usarios no identificados.
+En primer lugar entramos a la web de Heroku [Heroku](http://acortador.herokuapp.com/), luego miramos que hay una serie de enlaces "Sign in with Google" o "Not Sign in with Google", si elegimos la primera opción nos identificamos con Google y luego todas las URL que acortemos se guardaran al usuario identificado, sin embargo si no queremos identificarnos podemos hacer la misma operación clickeando en "Not Sign in with Google" con lo que se mostrará la lista de URL acortadas de todos los usarios no identificados.
 
 El procedimiento para acortar las URL consiste en rellenar el campo "Introduce tu URL" y el sistema automaticamente le asignará un número que representa esa URL, si queremos de forma opcional incluir una URL en específico rellenaremos el segundo campo "short URL" con lo que conseguimos que sea representada la URL larga por esa URL opcional. 
 
