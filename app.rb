@@ -21,6 +21,8 @@ end
 enable :sessions               
 set :session_secret, '*&(^#234a)'
 
+disable :show_exceptions
+disable :raise_errors
 
 configure :development do
 	DataMapper.setup( :default, ENV['DATABASE_URL'] || 
@@ -120,4 +122,4 @@ if to_url
 
 end
 
-error do haml :index end
+error do erb :not_found end
