@@ -15,11 +15,11 @@
 
 ###Instrucciones de la práctica
 
-En primer lugar entramos a la web de Heroku [Heroku](http://acortador.herokuapp.com/), luego miramos que hay una serie de enlaces "Sign in with Google" o "Not Sign in with Google", si elegimos la primera opción nos identificamos con Google y luego todas las URL que acortemos se guardaran al usuario identificado, sin embargo si no queremos identificarnos podemos hacer la misma operación clickeando en "Not Sign in with Google" con lo que se mostrará la lista de URL acortadas de todos los usarios no identificados.
+En primer lugar entramos a la web desplegada en [Heroku](http://acortador.herokuapp.com/), luego en el home, podemos ver una serie de enlaces "Sign in with Google" o "Not Sign in with Google", asi como dos cajas de texto, si elegimos la primera opción, "Sign in with Google" nos identificamos con Google y luego todas las URL que acortemos se guardaran en la base de datos,al usuario identificado previamente, sin embargo si no queremos identificarnos podemos hacer la misma operación clickeando en "Not Sign in with Google" con lo que se mostrará la lista de URL acortadas de todos los usarios no identificados.
 
-El procedimiento para acortar las URL consiste en rellenar el campo "Introduce tu URL" y el sistema automaticamente le asignará un número que representa esa URL, si queremos de forma opcional incluir una URL en específico rellenaremos el segundo campo "short URL" con lo que conseguimos que sea representada la URL larga por esa URL opcional. 
+El procedimiento para acortar las URL consiste en rellenar el campo "Introduce tu URL" y el sistema automaticamente le asignará un número que representa esa URL, si queremos de forma opcional incluir una URL específica, rellenaremos el segundo campo "short URL" con lo que conseguimos que sea representada la URL larga por esa URL opcional. 
 
-Se mostrará una lista URL indicando tanto el número asignado como las "short URL" de cada enlace. Esta lista cambiará, como ya se indico dependiendo si el usuario se identifica o no.
+Se mostrará una lista de URL indicando tanto el número asignado como las "short URL" de cada enlace. Esta lista cambiará, como ya se indico dependiendo si el usuario se identifica o no.
 
 ###Ejecución del servidor local
 
