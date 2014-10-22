@@ -6,7 +6,7 @@
 			 
 **Fecha:** 20 de Octubre de 2014
 
-**Details:** Aumentamos el ejemplo Acortador de URLs presentado en esta sección [pinche aqui] (http://nereida.deioc.ull.es/~lpp/perlexamples/node482.html#section:abreviadorurls) para que admita además abreviaciones elegidas por el usuario. Desplegamos en Heroku la práctica y por último si el usuario esta autemticado (Google/GitHub/Twitter, etc.) se le ofrecera una opción para ver la lista de sus links.
+**Detalles:** Aumentamos el ejemplo Acortador de URLs presentado en esta sección [pinche aqui] (http://nereida.deioc.ull.es/~lpp/perlexamples/node482.html#section:abreviadorurls) para que admita además abreviaciones elegidas por el usuario. Desplegamos en Heroku la práctica y por último si el usuario esta autemticado (Google/GitHub/Twitter, etc.) se le ofrecera una opción para ver la lista de sus links.
 
 
 ###Despliegue en Heroku
@@ -15,7 +15,15 @@
 
 ###Instrucciones de la práctica
 
+En primer lugar entramos a la web de Heroku, luego miramos que hay una serie de enlaces "Sign in with Google" o "Not Sign in with Google", si elegimos la primera opción nos identificamos con Google y luego todas las URL que acortemos se guardaran al usuario identificado, sin embargo si no queremos identificarnos podemos hacer la misma operación clickeando en "Not Sign in with Google" con lo que se mostrará la lista de URL acortadas de todos los usarios no identificados.
 
+El procedimiento para acortar las URL consiste en rellenar el campo "Introduce tu URL" y el sistema automaticamente le asignará un número que representa esa URL, si queremos de forma opcional incluir una URL en específico rellenaremos el segundo campo "short URL" con lo que conseguimos que sea representada la URL larga por esa URL opcional. 
+
+Se mostrará una lista URL indicando tanto el número asignado como las "short URL" de cada enlace. Esta lista cambiará, como ya se indico dependiendo si el usuario se identifica o no.
+
+###Ejecución del servidor local
+
+Ejecutamos la práctica con la opción `rake`
 
 ###Ver
 
