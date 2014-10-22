@@ -11,7 +11,7 @@
 
 ###Despliegue en Heroku
 
-	* [Heroku](http://acortador.herokuapp.com/)
+[Heroku](http://acortador.herokuapp.com/)
 
 ###Instrucciones de la práctica
 
