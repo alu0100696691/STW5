@@ -4,7 +4,6 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'haml'
 require 'uri'
-#require 'socket'
 require 'data_mapper'
 require 'omniauth-oauth2'      
 require 'omniauth-google-oauth2'
@@ -40,7 +39,6 @@ require_relative 'model'
 
 DataMapper.finalize
 
-#DataMapper.auto_migrate!
 DataMapper.auto_upgrade!
 
 not_found do
@@ -49,22 +47,21 @@ not_found do
 end
 
 Base = 36
-$email = ""
 
 get '/' do
 	puts "inside get '/': #{params}"
-	@list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :id_usu => $email)  #listar url generales,las que no estan identificadas         
+	session[:email] = " "
+	@list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :id_usu => " ")  #listar url generales,las que no estan identificadas         
 	haml :index
 end
 
 get '/auth/:name/callback' do
-        @auth = request.env['omniauth.auth']
-        $email = @auth['info'].email
-        if @auth then
+        session[:auth] = @auth = request.env['omniauth.auth']
+	session[:email] = @auth['info'].email
+        if session[:auth] then  #@auth
         begin
                 puts "inside get '/': #{params}"
-                @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :id_usu => $email)  #listar url del usuario  
-                # in SQL => SELECT * FROM "ShortenedUrl" ORDER BY "id" ASC
+                @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :id_usu => session[:email])   #listar url del usuario  
                 haml :index
         end
         else
@@ -74,11 +71,8 @@ get '/auth/:name/callback' do
 end
 
 get '/noGoogle' || '/auth/failure' do
-        puts "inside get '/': #{params}"
-	$email = ""        
-	@list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :id_usu => $email)  #listar url generales  
-        haml :index
-
+	session.clear
+	redirect '/'
 end
 
 
@@ -90,9 +84,9 @@ post '/' do
   if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
     begin
       if params[:to] == " "
-                @short_url = ShortenedUrl.first_or_create(:url => params[:url], :id_usu => $email)
+                @short_url = ShortenedUrl.first_or_create(:url => params[:url], :id_usu => session[:email]) 
       else
-                @short_url = ShortenedUrl.first_or_create(:url => params[:url], :to => params[:to], :id_usu => $email)  #guardamos la dirección corta 
+                @short_url = ShortenedUrl.first_or_create(:url => params[:url], :to => params[:to], :id_usu => session[:email])  #guardamos la dirección corta 
       end
     rescue Exception => e
       puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
