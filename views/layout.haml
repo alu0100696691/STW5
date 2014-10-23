@@ -14,14 +14,15 @@
                 .row
                         .col-lg-12.text-center.v-center
                                 %h1 TinyClone                   
-                                %p.lead Práctica 4: Acortador de URLs   
-                                %a{:alt => "Google", :href => "/auth/google_oauth2"} Sign in with Google
+                                %p.lead Práctica 4: Acortador de URLs
                                 %br/
-                                %a{:alt => "salir google", :href => "/noGoogle"} Not Sign in with Google
-                                %br/          
+                                -if !session[:auth]
+                                        %a.btn.btn-success.btn-lg{:href=>'/auth/google_oauth2'} Sign In      
+                                -else
+                                        %a.btn.btn-danger.btn-lg{:href=>'/noGoogle'} Sign Out
                                 %br/
                                 %br/
-  
+                                %br/
                                 %form.form-inline{:action => "/", :method => "post"}
   
                                         .form-group{:style => "text-align:center;margin:0 auto;"}
