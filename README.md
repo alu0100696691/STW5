@@ -1,17 +1,25 @@
 #Sistemas y Tecnologías Web 
 
-##Práctica: Acortador de URLs
+##Práctica: Estadísticas de Visitas al Acortador de URLs
 
 **Autores:** Jose Antonio Rodríguez Leandro y Noelia Rodríguez Martín
 			 
-**Fecha:** 20 de Octubre de 2014
+**Fecha:** 2 de Noviembre de 2014
 
-**Detalles:** Aumentamos el ejemplo Acortador de URLs presentado en esta sección [pinche aqui] (http://nereida.deioc.ull.es/~lpp/perlexamples/node482.html#section:abreviadorurls) para que admita además abreviaciones elegidas por el usuario. Desplegamos en Heroku la práctica y por último si el usuario esta autemticado (Google/GitHub/Twitter, etc.) se le ofrecera una opción para ver la lista de sus links.
+**Detalles:**  En esta práctica extendemos la anterior práctica cuatro, con información estadística acerca de las visitas. Se pide que se presenten gráficos estadísticos (barras, etc.) del número de visitas por día, por país, etc.
+
+La información de las visitas se guardará en una tabla Visit.
+
+Cada objeto Visit representará una visita a la URL corta y contendrá información acerca de la visita:
+
+*    la fecha de la visita y
+*    la procedencia de la misma.
+
 
 
 ###Despliegue en Heroku
 
-[Heroku](http://acortador.herokuapp.com/)
+[Heroku](http://estadistica.herokuapp.com/)
 
 ###Instrucciones de la práctica
 
