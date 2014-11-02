@@ -17,6 +17,10 @@ class Visit
   property  :created_at,  DateTime
   property  :ip,          IPAddress
   property  :country,     String
+  property :countryCode, String
+  property :city, String
+  property :latitud, String
+  property :longitud, String
   
   belongs_to  :shortenedUrl
 

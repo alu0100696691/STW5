@@ -11,7 +11,7 @@ require 'pry'
 require 'erubis'               
 require 'pp'
 require 'chartkick'
-
+require 'xmlsimple'
 
 use OmniAuth::Builder do       
   config = YAML.load_file 'config/config.yml'
@@ -114,13 +114,38 @@ get '/:shortened' do
 if to_url
 	short_url.numero_visitas += 1  #incrementamos una visita
   	short_url.save
+	datos = get_datos
+	visit = Visit.new(:ip => data['ip'], :created_at => Time.now, :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"], :latitud => data["latitud"], :longitud => data["longitud"], :shortenedurl => short_url)
         redirect to_url.url, 301
   else
 	to_url.numero_visitas += 1  #incrementamos una visita
 	to_url.save
+	visit = Visit.new(:ip => data['ip'], :created_at => Time.now, :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"], :latitud => data["latitud"], :longitud => data["longitud"], :shortenedurl => short_url)
         redirect short_url.url, 301
   end
 
 end
 
-error do erb :not_found end
+error do 
+	erb :not_found 
+end
+
+def get_remote_ip(env)   #Este método ilustra formas de obtener la IP de la visita
+	puts "request.url = #{request.url}"
+	puts "request.ip = #{request.ip}"
+	puts env
+	if addr = env['HTTP_X_FORWARDED_FOR']
+		puts "env['HTTP_X_FORWARDED_FOR'] = #{addr}"
+		addr.split(',').first.strip
+	else
+		puts "env['REMOTE_ADDR'] = #{env['REMOTE_ADDR']}"
+		env['REMOTE_ADDR']
+	end
+end
+
+def get_datos
+	xml = RestClient.get "http://ip-api.com//xml/#{get_remote_ip(env)}"
+	datos = XmlSimple.xml_in(xml.to_s)
+	{"ip" => datos['query'][0].to_s, "countryCode" => datos['CountryCode'][0].to_s, "countryName" => datos['CountryName'][0].to_s, "city" => datos['City'][0].to_s, "latitud" => datos['Lat'][0].to_s, "longitud" => datos['Lon'][0].to_s}
+end
+
