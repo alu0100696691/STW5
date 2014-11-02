@@ -1,4 +1,4 @@
-class ShortenedUrl
+class Shortenedurl
   include DataMapper::Resource
 
   property :id, Serial
@@ -6,6 +6,7 @@ class ShortenedUrl
   property :to, Text
   property :id_usu, Text 
   property :numero_visitas, Integer
+  
   has n, :visits  
 
 end
@@ -22,6 +23,6 @@ class Visit
   property :latitud, String
   property :longitud, String
   
-  belongs_to  :shortenedUrl
+  belongs_to  :shortenedurl
 
 end

@@ -21,8 +21,8 @@ end
 enable :sessions               
 set :session_secret, '*&(^#234a)'
 
-disable :show_exceptions
-disable :raise_errors
+#disable :show_exceptions
+#disable :raise_errors
 
 configure :development do
 	DataMapper.setup( :default, ENV['DATABASE_URL'] || 
@@ -52,7 +52,7 @@ Base = 36
 get '/' do
 	puts "inside get '/': #{params}"
 	session[:email] = " "
-	@list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :id_usu => " ")  #listar url generales,las que no estan identificadas         
+	@list = Shortenedurl.all(:order => [ :id.asc ], :limit => 20, :id_usu => " ")  #listar url generales,las que no estan identificadas         
 	haml :index
 end
 
@@ -62,7 +62,7 @@ get '/auth/:name/callback' do
         if session[:auth] then  #@auth
         begin
                 puts "inside get '/': #{params}"
-                @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :id_usu => session[:email])   #listar url del usuario  
+                @list = Shortenedurl.all(:order => [ :id.asc ], :limit => 20, :id_usu => session[:email])   #listar url del usuario  
                 haml :index
         end
         else
@@ -71,12 +71,12 @@ get '/auth/:name/callback' do
 
 end
 
-['/noGoogle','/auth/failure'].each |path|
-get path do
-	session.clear
-	redirect '/'
+['/noGoogle','/auth/failure'].each do |path|
+	get path do
+		session.clear
+		redirect '/'
+	end
 end
-
 
 
 
@@ -86,9 +86,9 @@ post '/' do
   if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
     begin
       if params[:to] == " "
-                @short_url = ShortenedUrl.first_or_create(:url => params[:url], :id_usu => session[:email], :numero_visitas => 0) 
+                @short_url = Shortenedurl.first_or_create(:url => params[:url], :id_usu => session[:email], :numero_visitas => 0) 
       else
-                @short_url = ShortenedUrl.first_or_create(:url => params[:url], :to => params[:to], :id_usu => session[:email], :numero_visitas => 0)  #guardamos la dirección corta 
+                @short_url = Shortenedurl.first_or_create(:url => params[:url], :to => params[:to], :id_usu => session[:email], :numero_visitas => 0)  #guardamos la dirección corta 
       end
     rescue Exception => e
       puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
@@ -101,10 +101,22 @@ post '/' do
   redirect '/'
 end
 
+get '/estadisticas' do
+        if session[:auth]
+                @list = Shortenedurl.all(:order => [ :numero_visitas.desc ], :limit => 20, :id_usu => session[:email])   #listar url del usuario            
+        else
+                @list = Shortenedurl.all(:order => [ :id.asc ], :limit => 20, :id_usu => " ")  #listar url generales,las que no estan identificada    s
+        end
+        haml :estadisticas
+end
+
+
+
+
 get '/:shortened' do
   puts "inside get '/:shortened': #{params}"
-  short_url = ShortenedUrl.first(:id => params[:shortened].to_i(Base))
-  to_url = ShortenedUrl.first(:to => params[:shortened])
+  short_url = Shortenedurl.first(:id => params[:shortened].to_i(Base))
+  to_url = Shortenedurl.first(:to => params[:shortened])
 
   # HTTP status codes that start with 3 (such as 301, 302) tell the
   # browser to go look for that resource in another location. This is
@@ -112,15 +124,16 @@ get '/:shortened' do
   # is no longer at the original location. The two most commonly used
   # redirection status codes are 301 Move Permanently and 302 Found.
 if to_url
-	short_url.numero_visitas += 1  #incrementamos una visita
-  	short_url.save
-	datos = get_datos
-	visit = Visit.new(:ip => data['ip'], :created_at => Time.now, :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"], :latitud => data["latitud"], :longitud => data["longitud"], :shortenedurl => short_url)
+	#short_url.numero_visitas += 1  #incrementamos una visita
+  	#short_url.save
+	#datos = get_datos
+	#visit = Visit.new(:ip => data['ip'], :created_at => Time.now, :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"], :latitud => data["latitud"], :longitud => data["longitud"], :shortenedurl => to_url)
         redirect to_url.url, 301
   else
-	to_url.numero_visitas += 1  #incrementamos una visita
-	to_url.save
-	visit = Visit.new(:ip => data['ip'], :created_at => Time.now, :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"], :latitud => data["latitud"], :longitud => data["longitud"], :shortenedurl => short_url)
+	#to_url.numero_visitas += 1  #incrementamos una visita
+	#to_url.save
+	#datos = get_datos
+	#visit = Visit.new(:ip => data['ip'], :created_at => Time.now, :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"], :latitud => data["latitud"], :longitud => data["longitud"], :shortenedurl => short_url)
         redirect short_url.url, 301
   end
 

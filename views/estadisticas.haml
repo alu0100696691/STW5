@@ -1,0 +1,27 @@
+%table.table
+  %tr
+    %th
+      URL Corta
+    %th
+      Visitas
+    %th
+      Autor
+    %th
+      Estadísticas
+  - @list.each do |elem|
+    %tr
+      %td
+        - if elem.to != " "
+          %a{:href=>"/#{elem.to}"} #{elem.id.to_s(Base)} #{elem.to}
+        - else
+          %a{:href=>"/#{elem.id.to_s(Base)}"} #{elem.url}
+      %td
+        #{elem.numero_visitas}
+      %td
+        - if elem.id_usu != " "
+          #{elem.id_usu}
+        - else
+          PUBLICA
+      %td
+        %a{:href=>"/info/#{elem.to}", :title => "Estadísticas"}
+          %i.fa-bar-chart
