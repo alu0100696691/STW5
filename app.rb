@@ -10,6 +10,7 @@ require 'omniauth-google-oauth2'
 require 'pry'
 require 'erubis'               
 require 'pp'
+require 'chartkick'
 
 
 use OmniAuth::Builder do       
@@ -70,7 +71,8 @@ get '/auth/:name/callback' do
 
 end
 
-get '/noGoogle' || '/auth/failure' do
+['/noGoogle','/auth/failure'].each |path|
+get path do
 	session.clear
 	redirect '/'
 end
