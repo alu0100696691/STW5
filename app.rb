@@ -13,6 +13,9 @@ require 'pp'
 require 'chartkick'
 require 'xmlsimple'
 require 'restclient'
+require 'dm-timestamps'
+require 'dm-core'
+require 'dm-types'
 
 use OmniAuth::Builder do       
   config = YAML.load_file 'config/config.yml'
@@ -129,18 +132,14 @@ get '/:shortened' do
 if to_url
 	to_url.num_visit += 1  #incrementamos una visita
   	to_url.save
-	#datos = get_datos
-	#visit = Visit.new(:ip => datos['ip'], :created_at => Time.now, :country => datos['countryName'], :countryCode => datos['countryCode'], :city => datos["city"], :latitud => datos["latitud"], :longitud => datos["longitud"], :shortenedurl => to_url)
-	data = get_geo
-	visit = Visit.new(:ip => data['ip'], :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"],:latitud => data["latitude"], :longitud => data["longitude"], :shortenedurl => short_url, :created_at => Time.now)
+	data = get_data
+	visit = Visit.new(:ip => data['ip'], :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"],:latitud => data["latitude"], :longitud => data["longitude"], :shortenedurl => to_url, :created_at => Time.now)
 	visit.save
         redirect to_url.url, 301
   else
 	short_url.num_visit += 1  #incrementamos una visita
 	short_url.save
-	#datos = get_datos
-	#visit = Visit.new(:ip => datos['ip'], :created_at => Time.now, :country => datos['countryName'], :countryCode => datos['countryCode'], :city => datos["city"], :latitud => datos["latitud"], :longitud => datos["longitud"], :shortenedurl => short_url)
-	data = get_geo
+	data = get_data
 	visit = Visit.new(:ip => data['ip'], :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"],:latitud => data["latitude"], :longitud => data["longitude"], :shortenedurl => short_url, :created_at => Time.now)	
 	visit.save
         redirect short_url.url, 301
@@ -165,17 +164,10 @@ def get_remote_ip(env)   #Este método ilustra formas de obtener la IP de la vis
 	end
 end
 
-def get_geo
+def get_data
 	xml = RestClient.get "http://freegeoip.net/xml/#{get_remote_ip(env)}"
 	data = XmlSimple.xml_in(xml.to_s)
 	{"ip" => data['Ip'][0].to_s, "countryCode" => data['CountryCode'][0].to_s, "countryName" => data['CountryName'][0].to_s, "city" => data['City'][0].to_s, "latitude" => data['Latitude'][0].to_s, "longitude" => data['Longitude'][0].to_s}
 end
 
-=begin
-def get_datos
-	xml = RestClient.get "http://ip-api.com//xml/#{get_remote_ip(env)}"
-	datos = XmlSimple.xml_in(xml.to_s)   #usamos libreria XmlSimple 
-	{"ip" => datos['query'][0].to_s, "countryCode" => datos['countryCode'][0].to_s, "countryName" => datos['country'][0].to_s, "city" => datos['city'][0].to_s, "latitud" => datos['lat'][0].to_s, "longitud" => datos['lon'][0].to_s}
-end
-=end
 
