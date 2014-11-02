@@ -5,7 +5,7 @@ class ShortenedUrl
   property :url, Text
   property :to, Text
   property :id_usu, Text 
-
+  property :numero_visitas, Integer
   has n, :visits  
 
 end

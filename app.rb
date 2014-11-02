@@ -86,9 +86,9 @@ post '/' do
   if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
     begin
       if params[:to] == " "
-                @short_url = ShortenedUrl.first_or_create(:url => params[:url], :id_usu => session[:email]) 
+                @short_url = ShortenedUrl.first_or_create(:url => params[:url], :id_usu => session[:email], :numero_visitas => 0) 
       else
-                @short_url = ShortenedUrl.first_or_create(:url => params[:url], :to => params[:to], :id_usu => session[:email])  #guardamos la dirección corta 
+                @short_url = ShortenedUrl.first_or_create(:url => params[:url], :to => params[:to], :id_usu => session[:email], :numero_visitas => 0)  #guardamos la dirección corta 
       end
     rescue Exception => e
       puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
