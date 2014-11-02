@@ -145,7 +145,7 @@ end
 
 def get_datos
 	xml = RestClient.get "http://ip-api.com//xml/#{get_remote_ip(env)}"
-	datos = XmlSimple.xml_in(xml.to_s)
+	datos = XmlSimple.xml_in(xml.to_s)   #usamos libreria XmlSimple 
 	{"ip" => datos['query'][0].to_s, "countryCode" => datos['CountryCode'][0].to_s, "countryName" => datos['CountryName'][0].to_s, "city" => datos['City'][0].to_s, "latitud" => datos['Lat'][0].to_s, "longitud" => datos['Lon'][0].to_s}
 end
 
