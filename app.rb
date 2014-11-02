@@ -12,6 +12,7 @@ require 'erubis'
 require 'pp'
 require 'chartkick'
 require 'xmlsimple'
+require 'restclient'
 
 use OmniAuth::Builder do       
   config = YAML.load_file 'config/config.yml'
@@ -41,6 +42,8 @@ require_relative 'model'
 DataMapper.finalize
 
 DataMapper.auto_upgrade!
+
+#Shortenedurl.destroy
 
 not_found do
 	status 404
@@ -86,9 +89,9 @@ post '/' do
   if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
     begin
       if params[:to] == " "
-                @short_url = Shortenedurl.first_or_create(:url => params[:url], :id_usu => session[:email], :numero_visitas => 0) 
+                @short_url = Shortenedurl.first_or_create(:url => params[:url], :id_usu => session[:email], :num_visit => 0) 
       else
-                @short_url = Shortenedurl.first_or_create(:url => params[:url], :to => params[:to], :id_usu => session[:email], :numero_visitas => 0)  #guardamos la dirección corta 
+                @short_url = Shortenedurl.first_or_create(:url => params[:url], :to => params[:to], :id_usu => session[:email], :num_visit => 0)  #guardamos la dirección corta 
       end
     rescue Exception => e
       puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
@@ -103,7 +106,7 @@ end
 
 get '/estadisticas' do
         if session[:auth]
-                @list = Shortenedurl.all(:order => [ :numero_visitas.desc ], :limit => 20, :id_usu => session[:email])   #listar url del usuario            
+                @list = Shortenedurl.all(:order => [ :num_visit.desc ], :limit => 20, :id_usu => session[:email])   #listar url del usuario            
         else
                 @list = Shortenedurl.all(:order => [ :id.asc ], :limit => 20, :id_usu => " ")  #listar url generales,las que no estan identificada    s
         end
@@ -124,16 +127,22 @@ get '/:shortened' do
   # is no longer at the original location. The two most commonly used
   # redirection status codes are 301 Move Permanently and 302 Found.
 if to_url
-	#short_url.numero_visitas += 1  #incrementamos una visita
-  	#short_url.save
+	to_url.num_visit += 1  #incrementamos una visita
+  	to_url.save
 	#datos = get_datos
-	#visit = Visit.new(:ip => data['ip'], :created_at => Time.now, :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"], :latitud => data["latitud"], :longitud => data["longitud"], :shortenedurl => to_url)
+	#visit = Visit.new(:ip => datos['ip'], :created_at => Time.now, :country => datos['countryName'], :countryCode => datos['countryCode'], :city => datos["city"], :latitud => datos["latitud"], :longitud => datos["longitud"], :shortenedurl => to_url)
+	data = get_geo
+	visit = Visit.new(:ip => data['ip'], :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"],:latitud => data["latitude"], :longitud => data["longitude"], :shortenedurl => short_url, :created_at => Time.now)
+	visit.save
         redirect to_url.url, 301
   else
-	#to_url.numero_visitas += 1  #incrementamos una visita
-	#to_url.save
+	short_url.num_visit += 1  #incrementamos una visita
+	short_url.save
 	#datos = get_datos
-	#visit = Visit.new(:ip => data['ip'], :created_at => Time.now, :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"], :latitud => data["latitud"], :longitud => data["longitud"], :shortenedurl => short_url)
+	#visit = Visit.new(:ip => datos['ip'], :created_at => Time.now, :country => datos['countryName'], :countryCode => datos['countryCode'], :city => datos["city"], :latitud => datos["latitud"], :longitud => datos["longitud"], :shortenedurl => short_url)
+	data = get_geo
+	visit = Visit.new(:ip => data['ip'], :country => data['countryName'], :countryCode => data['countryCode'], :city => data["city"],:latitud => data["latitude"], :longitud => data["longitude"], :shortenedurl => short_url, :created_at => Time.now)	
+	visit.save
         redirect short_url.url, 301
   end
 
@@ -156,9 +165,17 @@ def get_remote_ip(env)   #Este método ilustra formas de obtener la IP de la vis
 	end
 end
 
+def get_geo
+	xml = RestClient.get "http://freegeoip.net/xml/#{get_remote_ip(env)}"
+	data = XmlSimple.xml_in(xml.to_s)
+	{"ip" => data['Ip'][0].to_s, "countryCode" => data['CountryCode'][0].to_s, "countryName" => data['CountryName'][0].to_s, "city" => data['City'][0].to_s, "latitude" => data['Latitude'][0].to_s, "longitude" => data['Longitude'][0].to_s}
+end
+
+=begin
 def get_datos
 	xml = RestClient.get "http://ip-api.com//xml/#{get_remote_ip(env)}"
 	datos = XmlSimple.xml_in(xml.to_s)   #usamos libreria XmlSimple 
-	{"ip" => datos['query'][0].to_s, "countryCode" => datos['CountryCode'][0].to_s, "countryName" => datos['CountryName'][0].to_s, "city" => datos['City'][0].to_s, "latitud" => datos['Lat'][0].to_s, "longitud" => datos['Lon'][0].to_s}
+	{"ip" => datos['query'][0].to_s, "countryCode" => datos['countryCode'][0].to_s, "countryName" => datos['country'][0].to_s, "city" => datos['city'][0].to_s, "latitud" => datos['lat'][0].to_s, "longitud" => datos['lon'][0].to_s}
 end
+=end
 

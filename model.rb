@@ -3,9 +3,9 @@ class Shortenedurl
 
   property :id, Serial
   property :url, Text
-  property :to, Text
+  property :to, Text 
   property :id_usu, Text 
-  property :numero_visitas, Integer
+  property :num_visit, Integer
   
   has n, :visits  
 

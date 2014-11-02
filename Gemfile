@@ -10,6 +10,7 @@ gem 'pry'
 gem 'erubis'
 gem 'xml-simple'
 gem 'chartkick'
+gem 'rest-client'
 
 group :production do
 	gem "pg"

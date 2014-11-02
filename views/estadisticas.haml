@@ -16,12 +16,12 @@
         - else
           %a{:href=>"/#{elem.id.to_s(Base)}"} #{elem.url}
       %td
-        #{elem.numero_visitas}
+        #{elem.num_visit}
       %td
         - if elem.id_usu != " "
           #{elem.id_usu}
         - else
           PUBLICA
       %td
-        %a{:href=>"/info/#{elem.to}", :title => "Estadísticas"}
-          %i.fa-bar-chart
+        %a{:href=>"/infoDetalle/#{elem.to}", :title => "Estadísticas"}
+          %i.fa.fa-cog.fa-spin
