@@ -116,7 +116,10 @@ get '/estadisticas' do
         haml :estadisticas
 end
 
-
+get '/graficas/:shortened' do
+	@list = Shortenedurl.first(:to => params[:shortened])
+	haml :graficas
+end
 
 
 get '/:shortened' do
