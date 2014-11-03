@@ -1,0 +1,24 @@
+%table.table
+  %tr                          
+    %th
+      %h1 Información
+  %tr
+    %th
+      URL
+    %th
+      SHORTURL
+    %th
+      Nº VISITAS
+  %tr
+    %th
+      #{@list.url}
+    %th
+      #{@list.to}
+    %th
+      #{@list.num_visit}
+
+.panel.panel-primary
+  .panel-heading
+    %h1 GRÁFICAS
+  .panel-body
+    = pie_chart "Football" => 10, "Basketball" => 5, "Hockey" => 2  

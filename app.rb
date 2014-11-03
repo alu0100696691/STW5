@@ -118,6 +118,10 @@ end
 
 get '/graficas/:shortened' do
 	@list = Shortenedurl.first(:to => params[:shortened])
+
+	@visit = Visit.all()
+		
+
 	haml :graficas
 end
 
