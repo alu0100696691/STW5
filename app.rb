@@ -25,8 +25,8 @@ end
 enable :sessions               
 set :session_secret, '*&(^#234a)'
 
-#disable :show_exceptions
-#disable :raise_errors
+disable :show_exceptions
+disable :raise_errors
 
 configure :development do
 	DataMapper.setup( :default, ENV['DATABASE_URL'] || 
