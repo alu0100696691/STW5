@@ -21,12 +21,11 @@
                         .col-lg-12.text-center.v-center
                                 %h1 TinyClone                   
                                 %p.lead Práctica 5: Acortador de URLs Estadísticas
-                                %br/
+                                %a.btn.btn-primary.btn-lg{:href=>'/'} ____HOME____
                                 -if !session[:auth]
-                                        %a.btn.btn-success.btn-lg{:href=>'/auth/google_oauth2'} Sign In      
+                                        %a.btn.btn-success.btn-lg{:href=>'/auth/google_oauth2'} __Sign In__      
                                 -else
-                                        %a.btn.btn-danger.btn-lg{:href=>'/noGoogle'} Sign Out
-                                %br/
+                                        %a.btn.btn-danger.btn-lg{:href=>'/noGoogle'} __Sign Out__
                                 %a.btn.btn-danger.btn-lg{:href=>'/estadisticas'} Estadísticas
                                 %br/
                                 %br/
