@@ -17,8 +17,25 @@
     %th
       #{@list.num_visit}
 
-.panel.panel-primary
-  .panel-heading
-    %h1 GRÁFICAS
-  .panel-body
-    = pie_chart "Football" => 10, "Basketball" => 5, "Hockey" => 2  
+
+
+%ul.nav.nav-tabs
+  %li.active
+    %a{"data-toggle" => "tab", :href => "#1" "#tab1"} 
+      Gráfica Paises
+  %li
+    %a{"data-toggle" => "tab", :href => "#2" "#tab2"} 
+      Gráfica Ciudades 
+  %li
+    %a{"data-toggle" => "tab", :href => "#3" "#tab3"} 
+      Mapa Paises
+  
+
+.tab-content
+  .tab-pane.active{ :id => "tab1"}
+    = pie_chart @country
+  .tab-pane{ :id => "tab2"}
+    = column_chart @ciudad , height: "500px", width: "900px"
+  .tab-pane{ :id => "tab3"}
+    = geo_chart @country 
+

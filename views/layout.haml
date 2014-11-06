@@ -20,7 +20,7 @@
                 .row
                         .col-lg-12.text-center.v-center
                                 %h1 TinyClone                   
-                                %p.lead Práctica 4: Acortador de URLs
+                                %p.lead Práctica 5: Acortador de URLs Estadísticas
                                 %br/
                                 -if !session[:auth]
                                         %a.btn.btn-success.btn-lg{:href=>'/auth/google_oauth2'} Sign In      
@@ -47,10 +47,10 @@
                 %br/
                 %br/
         .row
-                .col-md-4.col-md-offset-4.container-down
+                .col-md-12
                         =yield
         .row
-                .col-lg-12
+                .col-md-12
                         %br/
                         %br/
                         %p.text-center Noelia y José Antonio practica4_STW ull©Copyright 2014

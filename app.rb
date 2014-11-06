@@ -117,9 +117,29 @@ get '/estadisticas' do
 end
 
 get '/graficas/:shortened' do
-	@list = Shortenedurl.first(:to => params[:shortened])
+	
+	@country = Hash.new
+	@ciudad  = Hash.new	
+	
+	url = Shortenedurl.first(:id => params[:shortened].to_i(Base)) 
+	@list = Shortenedurl.first(:to => url.to)  #para sacar los datos del url corto
 
-	@visit = Visit.all()
+	visit = Visit.all(:shortenedurl => url)  #datos guardados en tabla visit de ese url corto
+        
+	#guardamos en el hash las veces que aparece ese pais,ciudad
+	visit.each { |visit|
+        	if(@country[visit.country].nil? == true)
+			@country[visit.country] = 1
+		else
+			@country[visit.country] +=1
+		end
+		
+		if(@ciudad[visit.city].nil? == true)
+			@ciudad[visit.city] = 1
+		else
+			@ciudad[visit.city] +=1
+		end
+	}	 	
 		
 
 	haml :graficas
