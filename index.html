@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640">
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Estadísticas de Visitas al Acortador de URLs by alu0100696691</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/alu0100696691/STW5">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Estadísticas de Visitas al Acortador de URLs</h1>
+            <h2></h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/alu0100696691/STW5/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/alu0100696691/STW5/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
+<a id="sistemas-y-tecnologías-web" class="anchor" href="#sistemas-y-tecnolog%C3%ADas-web" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sistemas y Tecnologías Web</h1>
+
+<h2>
+<a id="práctica-estadísticas-de-visitas-al-acortador-de-urls" class="anchor" href="#pr%C3%A1ctica-estad%C3%ADsticas-de-visitas-al-acortador-de-urls" aria-hidden="true"><span class="octicon octicon-link"></span></a>Práctica: Estadísticas de Visitas al Acortador de URLs</h2>
+
+<p><strong>Autores:</strong> Jose Antonio Rodríguez Leandro y Noelia Rodríguez Martín</p>
+
+<p><strong>Fecha:</strong> 2 de Noviembre de 2014</p>
+
+<p><strong>Detalles:</strong>  En esta práctica extendemos la anterior práctica cuatro, con información estadística acerca de las visitas. Se pide que se presenten gráficos estadísticos (barras, etc.) del número de visitas por día, por país, etc.</p>
+
+<p>La información de las visitas se guardará en una tabla Visit.</p>
+
+<p>Cada objeto Visit representará una visita a la URL corta y contendrá información acerca de la visita:</p>
+
+<ul>
+<li>   la fecha de la visita y</li>
+<li>   la procedencia de la misma.</li>
+</ul>
+
+<h3>
+<a id="despliegue-en-heroku" class="anchor" href="#despliegue-en-heroku" aria-hidden="true"><span class="octicon octicon-link"></span></a>Despliegue en Heroku</h3>
+
+<p><a href="http://estadistica.herokuapp.com/">Heroku</a></p>
+
+<p><a href="https://github.com/alu0100696691/STW5">Repositorio</a></p>
+
+<h3>
+<a id="instrucciones-de-la-práctica" class="anchor" href="#instrucciones-de-la-pr%C3%A1ctica" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instrucciones de la práctica</h3>
+
+<p>En primer lugar entramos a la web desplegada en <a href="http://estadistica.herokuapp.com/">Heroku</a>, luego en el home, podemos ver un menu, asi como dos cajas de texto, si elegimos la opción, "Sign in" nos identificamos con Google y luego todas las URL que acortemos se guardaran en la base de datos,al usuario identificado previamente, sin embargo si no queremos identificarnos podemos hacer la misma operación sin indentificarnos, con lo que se mostrará la lista de URL acortadas de todos los usarios no identificados.</p>
+
+<p>El procedimiento para acortar las URL consiste en rellenar el campo "Introduce tu URL" y el sistema automaticamente le asignará un número que representa esa URL, si queremos de forma opcional incluir una URL específica, rellenaremos el segundo campo "short URL" con lo que conseguimos que sea representada la URL larga por esa URL opcional. </p>
+
+<p>Se mostrará una lista de URL indicando tanto el número asignado como las "short URL" de cada enlace. Esta lista cambiará, como ya se indico dependiendo si el usuario se identifica o no.</p>
+
+<p>En el menu aparece el botón "estadísticas", con el se mostrará una lista con los url, y un enlace con la opción "VER", si elegimos esa opción podremos ver información detallada de ese enlace en una serie de Gráficos.</p>
+
+<h4>
+<a id="ejecución-de-los-tests" class="anchor" href="#ejecuci%C3%B3n-de-los-tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ejecución de los tests</h4>
+
+<p>Para ejecutar los test de esta aplicación, una vez descargada nos situamos en el directorio que la contiene y ejecutamos el siguiente comando:
+<code>rake</code> o <code>rake tests</code></p>
+
+<h3>
+<a id="ejecución-del-servidor-local" class="anchor" href="#ejecuci%C3%B3n-del-servidor-local" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ejecución del servidor local</h3>
+
+<p>Ejecutamos la práctica con la opción <code>rake server</code></p>
+
+<h3>
+<a id="integración-continua-en-travis" class="anchor" href="#integraci%C3%B3n-continua-en-travis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Integración continua en Travis</h3>
+
+<p><a href="https://travis-ci.org/alu0100696691/STW2"><img src="https://travis-ci.org/alu0100696691/STW2.svg?branch=master" alt="Build Status"></a></p>
+
+<h3>
+<a id="ver" class="anchor" href="#ver" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ver</h3>
+
+<ul>
+<li><a href="http://nereida.deioc.ull.es/%7Elpp/perlexamples/node487.html#SECTION0316100010000000000000">La Tabla Principal</a></li>
+<li><a href="http://nereida.deioc.ull.es/%7Elpp/perlexamples/node487.html#SECTION0316100020000000000000">Obteniendo el país para una IP dada</a></li>
+<li><a href="http://nereida.deioc.ull.es/%7Elpp/perlexamples/node487.html#SECTION0316100030000000000000">La Tabla visit</a></li>
+<li><a href="http://nereida.deioc.ull.es/%7Elpp/perlexamples/node487.html#SECTION0316100040000000000000">Averiguar la IP</a></li>
+<li><a href="http://nereida.deioc.ull.es/%7Elpp/perlexamples/node487.html#SECTION0316100050000000000000">Gráficos con chartkick</a></li>
+</ul>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/alu0100696691">alu0100696691</a> can be found on <a href="https://github.com/alu0100696691/STW5">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
