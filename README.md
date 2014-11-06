@@ -21,16 +21,30 @@ Cada objeto Visit representará una visita a la URL corta y contendrá informaci
 
 [Heroku](http://estadistica.herokuapp.com/)
 
-[Repositorio](falta ponerlo)
+[Repositorio](https://github.com/alu0100696691/STW5)
 
 ###Instrucciones de la práctica
 
+En primer lugar entramos a la web desplegada en [Heroku](http://estadistica.herokuapp.com/), luego en el home, podemos ver un menu, asi como dos cajas de texto, si elegimos la opción, "Sign in" nos identificamos con Google y luego todas las URL que acortemos se guardaran en la base de datos,al usuario identificado previamente, sin embargo si no queremos identificarnos podemos hacer la misma operación sin indentificarnos, con lo que se mostrará la lista de URL acortadas de todos los usarios no identificados.
+
+El procedimiento para acortar las URL consiste en rellenar el campo "Introduce tu URL" y el sistema automaticamente le asignará un número que representa esa URL, si queremos de forma opcional incluir una URL específica, rellenaremos el segundo campo "short URL" con lo que conseguimos que sea representada la URL larga por esa URL opcional. 
+
+Se mostrará una lista de URL indicando tanto el número asignado como las "short URL" de cada enlace. Esta lista cambiará, como ya se indico dependiendo si el usuario se identifica o no.
+
+En el menu aparece el botón "estadísticas", con el se mostrará una lista con los url, y un enlace con la opción "VER", si elegimos esa opción podremos ver información detallada de ese enlace en una serie de Gráficos.
+
+####Ejecución de los tests
+
+Para ejecutar los test de esta aplicación, una vez descargada nos situamos en el directorio que la contiene y ejecutamos el siguiente comando:
+`rake` o `rake tests`
 
 
 
 ###Ejecución del servidor local
 
 Ejecutamos la práctica con la opción `rake server`
+
+
 
 ###Integración continua en Travis
 
