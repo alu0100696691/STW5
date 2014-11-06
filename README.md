@@ -30,7 +30,12 @@ Cada objeto Visit representará una visita a la URL corta y contendrá informaci
 
 ###Ejecución del servidor local
 
-Ejecutamos la práctica con la opción `rake`
+Ejecutamos la práctica con la opción `rake server`
+
+###Integración continua en Travis
+
+[![Build Status](https://travis-ci.org/alu0100696691/STW2.svg?branch=master)](https://travis-ci.org/alu0100696691/STW2)
+
 
 ###Ver
 
