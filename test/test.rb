@@ -7,6 +7,7 @@ require 'sinatra'
 require 'data_mapper'
 require_relative '../app.rb'
 
+
 describe "test Base datos " do
 	before :all do
 		@url = "ull@ull.es"
@@ -31,7 +32,8 @@ describe "test Base datos " do
 	
 
 end
-
+=begin
+describe "test home" do
 
 	it "El contenido esta en la pagina?" do
 		get '/'
@@ -53,3 +55,7 @@ end
 		get '/'
         	assert_match "<p>Noelia y José Antonio practica4_STW ull©Copyright 2014</p>" , last_response.body
 	end     
+
+end
+=end
+
