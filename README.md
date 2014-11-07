@@ -21,7 +21,7 @@ Cada objeto Visit representará una visita a la URL corta y contendrá informaci
 
 [Heroku](http://estadistica.herokuapp.com/)
 
-[Repositorio](https://github.com/alu0100696691/STW5)
+[Github](https://github.com/alu0100696691/STW5)
 
 ###Instrucciones de la práctica
 
