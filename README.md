@@ -48,7 +48,7 @@ Ejecutamos la práctica con la opción `rake server`
 
 ###Integración continua en Travis
 
-[![Build Status](https://travis-ci.org/alu0100696691/STW2.svg?branch=master)](https://travis-ci.org/alu0100696691/STW2)
+[![Build Status](https://travis-ci.org/alu0100696691/STW5.svg?branch=master)](https://travis-ci.org/alu0100696691/STW5)
 
 
 ###Ver
