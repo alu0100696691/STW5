@@ -1,9 +1,8 @@
-task :default => :tests
-
-desc "run test"
-task :tests do
-  sh "ruby test/test.rb"
+task(:default) do
+	require_relative 'test/test'
 end
+desc "run the tests"
+	task :test => :default
 
 desc "run the http server"
 task :server do

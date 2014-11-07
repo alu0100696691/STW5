@@ -8,9 +8,6 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'pry'
 gem 'erubis'
-gem 'minitest'
-gem 'rack-test'
-gem 'rake'
 gem 'xml-simple'
 gem 'chartkick'
 gem 'rest-client'
@@ -23,4 +20,11 @@ end
 group :development, :test do
 	gem "sqlite3"
 	gem "dm-sqlite-adapter"
+end
+
+group :test do
+	gem "sqlite3"
+	gem "dm-sqlite-adapter"
+	gem 'rake'
+	gem 'rack-test'
 end

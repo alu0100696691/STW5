@@ -7,11 +7,8 @@ require 'sinatra'
 require 'data_mapper'
 require_relative '../app.rb'
 
-describe "test del home" do
+describe "test Base datos " do
 	before :all do
-		@contenido = "Práctica 5: Acortador de URLs Estadísticas"
-		@titulo = "<title>TinyClone</title>"
-		@pie = "<p>Noelia y José Antonio practica4_STW ull©Copyright 2014</p>"
 		@url = "ull@ull.es"
 		@to  = "ull"
 		@id_usu = "myEmail@ull.com"
@@ -19,10 +16,6 @@ describe "test del home" do
 		@list = Shortenedurl.first(:to => @to)
 	end
 
-	it "El contenido esta en la pagina?" do
-	get '/'
-		assert last_response.body.include?(@contenido), "el contenido está en la web?"
-	end
 
 	it "la direccion web coincide" do
 		assert_equal @url, @list.url
@@ -36,20 +29,27 @@ describe "test del home" do
 		assert_equal @id_usu, @list.id_usu
 	end
 	
+
+end
+
+
+	it "El contenido esta en la pagina?" do
+		get '/'
+        	assert last_response.body.include?("Práctica 5: Acortador de URLs Estadísticas"), "el contenido está en la web?"
+	end
+
 	it "carga la web el servidor" do
 		get '/'
 		assert last_response.ok?
 	end
 
-
 	it "el titulo de la pagina es TinyClone?" do
 		get '/'
-		assert last_response.body.include?(@titulo), "El titulo debe ser 'TinyClone'"
-	end
-
-
-	it "Pie de pagina contiene: © 2014 Sistemas y Tecnologias Web - ULL " do
+        	assert last_response.body.include?("<title>TinyClone</title>"), "El titulo debe ser 'TinyClone'"
+	end     
+ 
+ 
+	it "Pie de pagina contiene Noelia y José Antonio " do
 		get '/'
-		assert_match @pie, last_response.body
-	end
-end
+        	assert_match "<p>Noelia y José Antonio practica4_STW ull©Copyright 2014</p>" , last_response.body
+	end     

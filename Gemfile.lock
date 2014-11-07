@@ -75,7 +75,6 @@ GEM
       multi_json (>= 1.5)
     method_source (0.8.2)
     mime-types (2.4.3)
-    minitest (4.7.5)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -139,7 +138,6 @@ DEPENDENCIES
   dm-sqlite-adapter
   erubis
   haml
-  minitest
   omniauth
   omniauth-google-oauth2
   pg
